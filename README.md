@@ -19,16 +19,16 @@
 **Log Entries:**
 
 ```plaintext
-2023-02-17 14:52:21 192.168.1.100 8.8.8.8 UDP 53 Allow 512
+2023-02-17 09:34:01 192.168.1.211 62.128.197.131 UDP 51820 Allow 1440
 ```
 
-**Description of log entries:** Outbound connection from internal host to external IP on port 4444.
+**Description of log entries:** WireGuard VPN traffic outbound.
 
-**Reason for concern:** Port 4444 is commonly associated with Metasploit or other remote access tools. 
+**Reason for concern:** Unexpected VPN traffic could hide data exfiltration or bypass controls.
 
-**Potential impact:** Could represent a backdoor or command-and-control (C2) channel. Severe risk if confirmed as malicious.
+**Potential impact:** Data loss, unauthorized access.
 
-**Possible explanations:** Compromised host communicating with attacker infrastructure. Misconfigured software using a high port. False positive if a legitimate app uses this port, but should be verified.
+**Possible explanations:** Employee using VPN, malware evading detection.
 
 ## Issue 3
 
@@ -72,29 +72,29 @@
 2023-02-17 09:36:15 192.168.1.61 141.98.10.195 TCP 21 Allow 2745
 ```
 
-**Description of log entries:** Denied SSH over IPv6.
+**Description of log entries:** FTP traffic to external IPs.
 
-**Reason for concern:** Unmonitored IPv6 traffic vector.
+**Reason for concern:** FTP is unencrypted; potential data leakage.
 
-**Potential impact:** Undetected remote access attempts.
+**Potential impact:** Credential theft, data exfiltration.
 
-**Possible explanations:** Misconfigured IPv6 services, scan attempt
+**Possible explanations:** Outdated backup process, malicious activity.
 
 ## Issue 6
 
 **Log Entries:**
 
 ```plaintext
-2023-02-17 09:36:44 192.168.1.80 185.151.204.30 TCP 48127 Deny 48
+2023-02-17 09:34:50 fdf8:f53b:82e4::53 fdf8:f53b:82e4:0:1652:14ff:fe0b:b71c TCP 22 Deny 0
 ```
 
-**Description of log entries:** Connection to external IP on port 8080 (often used for proxy servers or non-standard web services). Investigate the destination IP.
+**Description of log entries:** Denied SSH over IPv6.
 
-**Reason for concern:** 
+**Reason for concern:** Unmonitored IPv6 traffic vector.
 
-**Potential impact:** 
+**Potential impact:** Undetected remote access attempts.
 
-**Possible explanations:** 
+**Possible explanations:** Misconfigured IPv6 services, scan attempt.
 
 ## Issue 7
 
